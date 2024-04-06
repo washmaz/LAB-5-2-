@@ -13,15 +13,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]  # Update this line to use a non-deprecated version of Node.js
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3       # Update to use the latest version of checkout
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3     # Update to use the latest version of setup-node
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'                  # Add this line to enable caching of npm dependencies
     - name: Install dependencies
-      run: npm install
+      run: npm ci                     # Change to use npm ci for installing dependencies
     - name: Run Jest tests
       run: npm test
